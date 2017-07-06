@@ -1,0 +1,12 @@
+PODS:
+  - IBAnimatable (4.1.0)
+
+DEPENDENCIES:
+  - IBAnimatable
+
+SPEC CHECKSUMS:
+  IBAnimatable: 0fd2c9fd38c4798d71bcc18dbd87d473a7df2577
+
+PODFILE CHECKSUM: a5195864abd0c8a129d375d21a46fe1c3c0e96e7
+
+COCOAPODS: 1.2.0
