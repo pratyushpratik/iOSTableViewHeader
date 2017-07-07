@@ -18,15 +18,15 @@ class MeetingScheduleVC: UIViewController {
     var items = ["a"]
     var arrSection = ["a"]
     var days = ["Monday" , "Tuesday" ,"Wed" ,"Thurs" , "Fri" , "Sat"]
-    var neelamHeight: CGFloat? = 150.0
+    var cellHeight: CGFloat? = 150.0
     
-    var meetingHours: [MeetingHours] = [MeetingHours(dayName: "Monday", isSelected: "1", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute", waitingPeople: 10)]),MeetingHours(dayName: "Tuesday", isSelected: "1", slot:[Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Wednesday", isSelected: "1", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Thursday", isSelected: "1", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Friday", isSelected: "1", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Saturday", isSelected: "1", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]) , MeetingHours(dayName: "Sunday", isSelected: "1", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)])]
+    var meetingHours: [MeetingHours] = [MeetingHours(dayName: "Monday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute", waitingPeople: 10)]),MeetingHours(dayName: "Tuesday", isSelected: "1", slot:[Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Wednesday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Thursday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Friday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Saturday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]) , MeetingHours(dayName: "Sunday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)])]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // configureTableView()
-        tableView.estimatedRowHeight = neelamHeight ?? 0.0
+        tableView.estimatedRowHeight = cellHeight ?? 0.0
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -58,7 +58,14 @@ extension MeetingScheduleVC : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      if meetingHours[section].isSelected == "1"
+      {
         return 1
+        }
+        else
+      {
+        return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,23 +108,24 @@ extension MeetingScheduleVC : UITableViewDelegate, UITableViewDataSource
         return 56.0
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return neelamHeight ?? 0
+        return cellHeight ?? 0
     }
 }
 
 extension MeetingScheduleVC: RowHgtDelegate {
     
     func rowHgt(_section: Int, _hgt: CGFloat, _value: String) {
-        neelamHeight = _hgt
+        cellHeight = _hgt
         let model = meetingHours[_section]
         model.isSelected = _value == "true" ? "1" : "0"
         meetingHours[_section] = model
-        let indexPath = IndexPath(row: 0, section: _section)
-        if let visibleIndexPaths = tableView.indexPathsForVisibleRows?.index(of: indexPath as IndexPath) {
-            if visibleIndexPaths != NSNotFound {
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-            }
-        }
+        tableView.reloadData()
+//        let indexPath = IndexPath(row: 0, section: _section)
+//        if let visibleIndexPaths = tableView.indexPathsForVisibleRows?.index(of: indexPath as IndexPath) {
+//            if visibleIndexPaths != NSNotFound {
+//                tableView.reloadRows(at: [indexPath], with: .automatic)
+//            }
+//        }
         //        let indexPath = IndexPath(row: 0, section: _section)
         //        tableView.reloadRows(at: [indexPath], with: .fade)
         ////        let indexSet = IndexSet(integer: _section)
