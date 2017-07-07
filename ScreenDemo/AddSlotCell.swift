@@ -8,13 +8,21 @@
 
 import UIKit
 
+protocol AddRowDelegate{
+    func addRow(indexPath: IndexPath)
+}
+
 class AddSlotCell: UITableViewCell {
     
     @IBOutlet weak var lblStartTime: UILabel!
     @IBOutlet weak var lblEndTime: UILabel!
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var lblWaitingPeople: UILabel!
+    @IBOutlet weak var btnAddSlot: UIButton!
+    @IBOutlet weak var viewBtnAddSlot: UIView!
     
+    var delegate: AddRowDelegate?
+    var _indexPath: IndexPath?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,4 +35,7 @@ class AddSlotCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func btnActionAddSlot(_ sender: UIButton) {
+        delegate?.addRow(indexPath: _indexPath ?? IndexPath())
+    }
 }

@@ -27,7 +27,6 @@ class MeetingSectionHeader: UIView {
         return view
     }
     
-    
     func xibSetup() {
         let view = loadViewFromNib()
         view.frame = bounds
@@ -50,8 +49,8 @@ class MeetingSectionHeader: UIView {
     @IBAction func switchActionUpdate(_ sender: UISwitch) {
         
         if switchAction.isOn == true {
-            print("neelam")
-            delegate?.rowHgt(_section: section ?? 0 , _hgt: 150, _value: "true")
+            print("Cell Expanded")
+            delegate?.rowHgt(_section: section ?? 0 , _hgt: 216, _value: "true")
         }
         else {
             print ("hey there")

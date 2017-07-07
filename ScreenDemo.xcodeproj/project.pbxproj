@@ -14,7 +14,6 @@
 		1DEFBAEB1F0DFBB400579F49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DEFBAE91F0DFBB400579F49 /* LaunchScreen.storyboard */; };
 		1DEFBAF91F0E006F00579F49 /* MeetingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEFBAF81F0E006F00579F49 /* MeetingsCell.swift */; };
 		1DEFBAFD1F0E0B4300579F49 /* MeetingScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEFBAFC1F0E0B4300579F49 /* MeetingScheduleVC.swift */; };
-		1DEFBAFF1F0E151B00579F49 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEFBAFE1F0E151B00579F49 /* ScheduleCell.swift */; };
 		1DEFBB011F0E18D500579F49 /* AddSlotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEFBB001F0E18D500579F49 /* AddSlotCell.swift */; };
 		1DEFBB031F0E195400579F49 /* TableViewDataSource (1).swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEFBB021F0E195400579F49 /* TableViewDataSource (1).swift */; };
 		1DEFBB0B1F0E3E2F00579F49 /* MeetingSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEFBB0A1F0E3E2F00579F49 /* MeetingSectionHeader.swift */; };
@@ -34,7 +33,6 @@
 		1DEFBAEC1F0DFBB400579F49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1DEFBAF81F0E006F00579F49 /* MeetingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingsCell.swift; sourceTree = "<group>"; };
 		1DEFBAFC1F0E0B4300579F49 /* MeetingScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingScheduleVC.swift; sourceTree = "<group>"; };
-		1DEFBAFE1F0E151B00579F49 /* ScheduleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		1DEFBB001F0E18D500579F49 /* AddSlotCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSlotCell.swift; sourceTree = "<group>"; };
 		1DEFBB021F0E195400579F49 /* TableViewDataSource (1).swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableViewDataSource (1).swift"; sourceTree = "<group>"; };
 		1DEFBB0A1F0E3E2F00579F49 /* MeetingSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingSectionHeader.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 				1DEFBAEC1F0DFBB400579F49 /* Info.plist */,
 				1DEFBAF81F0E006F00579F49 /* MeetingsCell.swift */,
 				1DEFBAFC1F0E0B4300579F49 /* MeetingScheduleVC.swift */,
-				1DEFBAFE1F0E151B00579F49 /* ScheduleCell.swift */,
 				1DEFBB001F0E18D500579F49 /* AddSlotCell.swift */,
 				1DEFBB0A1F0E3E2F00579F49 /* MeetingSectionHeader.swift */,
 				1DEFBB0C1F0E3E3B00579F49 /* MeetingSectionHeader.xib */,
@@ -247,7 +244,6 @@
 				1DEFBB0F1F0E58DD00579F49 /* MeetingHours.swift in Sources */,
 				1DEFBB0B1F0E3E2F00579F49 /* MeetingSectionHeader.swift in Sources */,
 				1DEFBB011F0E18D500579F49 /* AddSlotCell.swift in Sources */,
-				1DEFBAFF1F0E151B00579F49 /* ScheduleCell.swift in Sources */,
 				1DEFBAF91F0E006F00579F49 /* MeetingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,9 +18,16 @@ class MeetingScheduleVC: UIViewController {
     var items = ["a"]
     var arrSection = ["a"]
     var days = ["Monday" , "Tuesday" ,"Wed" ,"Thurs" , "Fri" , "Sat"]
-    var cellHeight: CGFloat? = 150.0
+    var cellHeight: CGFloat? = 216.0
+    var countRow = Int()
+    var flagBtnHidden: Bool?
     
-    var meetingHours: [MeetingHours] = [MeetingHours(dayName: "Monday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute", waitingPeople: 10)]),MeetingHours(dayName: "Tuesday", isSelected: "1", slot:[Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Wednesday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Thursday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Friday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]),MeetingHours(dayName: "Saturday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)]) , MeetingHours(dayName: "Sunday", isSelected: "0", slot: [Slot(startTime: "12:00", endTime: "12:00", timeSlot: "15 minute",waitingPeople: 10)])]
+    var meetingHours: [MeetingHours] = [MeetingHours(dayName: "Monday", isSelected: "0", slot: [Slot(startTime: "12:00 am", endTime: "12:00 pm", timeSlot: "15 minute", waitingPeople: 10)]),MeetingHours(dayName: "Tuesday", isSelected: "0", slot:[Slot(startTime: "12:00 am", endTime: "12:00 pm", timeSlot: "15 minute",waitingPeople: 10)]),
+                                        MeetingHours(dayName: "Wednesday", isSelected: "0", slot: [Slot(startTime: "12:00 am", endTime: "12:00 pm", timeSlot: "15 minute",waitingPeople: 10)]),
+                                        MeetingHours(dayName: "Thursday", isSelected: "0", slot: [Slot(startTime: "12:00 am", endTime: "12:00 pm", timeSlot: "15 minute",waitingPeople: 10)]),
+                                        MeetingHours(dayName: "Friday", isSelected: "0", slot: [Slot(startTime: "12:00 am", endTime: "12:00 pm", timeSlot: "15 minute",waitingPeople: 10)]),
+                                        MeetingHours(dayName: "Saturday", isSelected: "0", slot: [Slot(startTime: "12:00 am", endTime: "12:00 pm", timeSlot: "15 minute",waitingPeople: 10)]) ,
+                                        MeetingHours(dayName: "Sunday", isSelected: "0", slot: [Slot(startTime: "12:00 am", endTime: "12:00 pm", timeSlot: "15 minute",waitingPeople: 10)])]
     
     
     override func viewDidLoad() {
@@ -58,33 +65,45 @@ extension MeetingScheduleVC : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      if meetingHours[section].isSelected == "1"
-      {
-        return 1
+        
+//        var a: Int?
+//        meetingHours[section].isSelected == "1" ? (a = 1) : (a = 0)
+//        debugPrint(a ?? 0)
+//        return a ?? 0
+        
+        
+        if meetingHours[section].isSelected == "1" {
+            return meetingHours[section].slot?.count ?? 0
         }
-        else
-      {
-        return 0
+        else{
+            return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //        let sectionHeaderView = tableView.headerView(forSection: indexPath.section) as? MeetingSectionHeader
-        //        sectionHeaderView?.sw
-        //
+       
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddSlotCell", for: indexPath) as? AddSlotCell else {return UITableViewCell()}
         cell.lblStartTime.text = meetingHours[indexPath.section].slot?[indexPath.row].startTime
         cell.lblEndTime.text = meetingHours[indexPath.section].slot?[indexPath.row].endTime
         cell.lblTime.text = meetingHours[indexPath.section].slot?[indexPath.row].timeSlot
         cell.lblWaitingPeople.text = "\(String(describing: meetingHours[indexPath.section].slot?[indexPath.row].waitingPeople ?? 0))"
-        return cell
+//        cell.viewBtnAddSlot.isHidden = true
+        //        for i in 0...(meetingHours[indexPath.section].slot?.count)! {
+        let i = Int()
+        if i == ((meetingHours[indexPath.section].slot?.count)! - 1) {
+            cell.viewBtnAddSlot.isHidden = false
+        }
         //        }
-        //        return UITableViewCell()
-    }
+        
+        
+        cell.delegate = self
+        cell._indexPath = indexPath
+        return cell
+            }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = MeetingSectionHeader(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: 56.0))
+        let headerView = MeetingSectionHeader(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: 48.0))
         headerView.lblDay.text = meetingHours[section].dayName
         headerView.switchAction.isOn = meetingHours[section].isSelected?.toBool ?? Bool()
         headerView.delegate = self
@@ -105,10 +124,14 @@ extension MeetingScheduleVC : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 56.0
+        return 48.0
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeight ?? 0
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+    
     }
 }
 
@@ -119,22 +142,44 @@ extension MeetingScheduleVC: RowHgtDelegate {
         let model = meetingHours[_section]
         model.isSelected = _value == "true" ? "1" : "0"
         meetingHours[_section] = model
-        tableView.reloadData()
-//        let indexPath = IndexPath(row: 0, section: _section)
-//        if let visibleIndexPaths = tableView.indexPathsForVisibleRows?.index(of: indexPath as IndexPath) {
-//            if visibleIndexPaths != NSNotFound {
-//                tableView.reloadRows(at: [indexPath], with: .automatic)
-//            }
+//        if _value == "true" {
+            tableView.reloadData()
 //        }
+//        else if _value == "false" {
+//            let indexSet = IndexSet(integer: _section)
+//            tableView.reloadSections(indexSet, with: .fade)
+            
+//            let indexPath = IndexPath(row: 0, section: _section)
+//            if let visibleIndexPaths = tableView.indexPathsForVisibleRows?.index(of: indexPath as IndexPath) {
+//                if visibleIndexPaths != NSNotFound {
+//                    tableView.reloadRows(at: [indexPath], with: .automatic)
+//                }
+//            }
+}
+//
         //        let indexPath = IndexPath(row: 0, section: _section)
         //        tableView.reloadRows(at: [indexPath], with: .fade)
         ////        let indexSet = IndexSet(integer: _section)
         ////        tableView.reloadSections(indexSet, with: .fade)
         //        tableView.reloadSections(IndexSet(integer: _section), with: .fade)
+    }
+
+extension MeetingScheduleVC: AddRowDelegate {
+    
+    func addRow(indexPath: IndexPath) {
+        self.countRow += 1
         
+        let model = meetingHours[indexPath.section]
+        model.slot?.append(Slot(startTime: "12:00 am", endTime: "12:00 pm", timeSlot: "15 minute",waitingPeople: 10))
+        meetingHours[indexPath.section] = model
+            
+//            = []
+//        meetingHours[indexPath.section].slot?.append(<#T##newElement: Slot##Slot#>)
+        
+        let index = IndexSet.init(integer: indexPath.section)
+        tableView.reloadSections(index, with: .fade)
     }
 }
-
 
 extension String {
     
